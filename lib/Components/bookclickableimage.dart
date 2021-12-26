@@ -14,9 +14,9 @@ class BookClickableImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
-        margin: EdgeInsets.only(left: marginLeft == null ? 80.00 : marginLeft),
-        width: width == null ? 120 : width,
-        height: height == null ? 175 : height,
+        margin: EdgeInsets.only(left: marginLeft == null ? 15.00 : marginLeft),
+        width: width == null ? 80 : width,
+        height: height == null ? 120 : height,
         decoration: BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.cover,

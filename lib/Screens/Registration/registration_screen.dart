@@ -290,7 +290,7 @@ class RegistrationScreen extends StatelessWidget {
                       if (loggedUserCopy.buyer)
                         Navigator.of(context).popAndPushNamed("/buyermain");
                       else
-                        Navigator.of(context).popAndPushNamed("/allbooksprodavac");
+                        Navigator.of(context).pop();
                     }
                   },
                 ),

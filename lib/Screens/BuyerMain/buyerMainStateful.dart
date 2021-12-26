@@ -18,11 +18,11 @@ class _BuyerMainStatefulState extends State<BuyerMainStateful> {
     LoggedUser loggedUser = Boxes.loggedUser().get("logged");
     UserBookRelation userBookRelation = Boxes.getUserBookRelations().get(loggedUser.userName);
     List<Widget> recommendedBooks = [];
-    for (int i = 0; i < userBookRelation.bookUrls.length && i < 8; ++i) {
+    for (int i = 0; i < userBookRelation.bookUrls.length; ++i) {
       if (i == 0) {
         recommendedBooks.add(BookClickableImage(
           imageUrl: userBookRelation.bookUrls[i],
-          marginLeft: 80,
+          marginLeft: 20,
         ));
       } else {
         recommendedBooks.add(BookClickableImage(
@@ -33,23 +33,23 @@ class _BuyerMainStatefulState extends State<BuyerMainStateful> {
     List<Widget> allBooks = [];
     List<Widget> allPromotedBooks = [];
     int promotedCounter = 0;
-    for (int i = 0; i < Boxes.getBooks().length && i < 8; ++i) {
+    for (int i = 0; i < Boxes.getBooks().length && i < 4; ++i) {
       Book book = Boxes.getBooks().getAt(i);
       if (i == 0)
         allBooks.add(BookClickableImage(
           imageUrl: book.bookUrl,
-          marginLeft: 80,
+          marginLeft: 20,
         ));
       else
         allBooks.add(BookClickableImage(imageUrl: book.bookUrl));
     }
-    for (int i = 0; i < Boxes.getBooks().length && promotedCounter < 8; ++i) {
+    for (int i = 0; i < Boxes.getBooks().length; ++i) {
       Book book = Boxes.getBooks().getAt(i);
       if (book.promoted) {
         if (promotedCounter == 0) {
           allPromotedBooks.add(BookClickableImage(
             imageUrl: book.bookUrl,
-            marginLeft: 80,
+            marginLeft: 20,
           ));
         } else {
           allPromotedBooks.add(BookClickableImage(
@@ -84,10 +84,10 @@ class _BuyerMainStatefulState extends State<BuyerMainStateful> {
               children: [
                 CinzelText(
                   displayText: "Perce",
-                  fontSize: 62,
+                  fontSize: 40,
                 ),
                 SizedBox(
-                  width: 20,
+                  width: 5,
                 ),
                 Container(
                   width: 26,
@@ -144,7 +144,7 @@ class _BuyerMainStatefulState extends State<BuyerMainStateful> {
             ),
           ),
           SizedBox(
-            width: 35,
+            width: 10,
           )
         ],
       ),
@@ -160,20 +160,23 @@ class _BuyerMainStatefulState extends State<BuyerMainStateful> {
             Row(
               children: [
                 SizedBox(
-                  width: 70,
+                  width: 15,
                 ),
                 CinzelText(
                   displayText: "PREPORUČENE KNJIGE",
-                  fontSize: 30,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ],
             ),
             SizedBox(
-              height: 35,
+              height: 20,
             ),
-            Row(
-              children: recommendedBooks,
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: recommendedBooks,
+              ),
             ),
             SizedBox(
               height: unit / 2,
@@ -181,20 +184,23 @@ class _BuyerMainStatefulState extends State<BuyerMainStateful> {
             Row(
               children: [
                 SizedBox(
-                  width: 70,
+                  width: 15,
                 ),
                 CinzelText(
                   displayText: "KNJIGE NA PROMOCIJI",
-                  fontSize: 30,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ],
             ),
             SizedBox(
-              height: 35,
+              height: 20,
             ),
-            Row(
-              children: allPromotedBooks,
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: allPromotedBooks,
+              ),
             ),
             SizedBox(
               height: unit / 2,
@@ -202,17 +208,17 @@ class _BuyerMainStatefulState extends State<BuyerMainStateful> {
             Row(
               children: [
                 SizedBox(
-                  width: 70,
+                  width: 15,
                 ),
                 CinzelText(
                   displayText: "SVE KNJIGE",
-                  fontSize: 30,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ],
             ),
             SizedBox(
-              height: 35,
+              height: 20,
             ),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
