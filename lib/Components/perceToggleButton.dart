@@ -23,6 +23,7 @@ class _PerceToggleButtonState extends State<PerceToggleButton> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(10),
@@ -42,7 +43,7 @@ class _PerceToggleButtonState extends State<PerceToggleButton> {
               ),
               TextButton(
                 style: TextButton.styleFrom(
-                  padding: EdgeInsets.all(16.0),
+                  padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
                   primary: Colors.white,
                   textStyle: TextStyle(fontSize: 20),
                 ),
@@ -58,7 +59,7 @@ class _PerceToggleButtonState extends State<PerceToggleButton> {
           ),
         ),
         SizedBox(
-          width: 50,
+          width: 20,
         ),
         ClipRRect(
           borderRadius: BorderRadius.circular(10),
@@ -78,7 +79,7 @@ class _PerceToggleButtonState extends State<PerceToggleButton> {
               ),
               TextButton(
                 style: TextButton.styleFrom(
-                  padding: EdgeInsets.all(16.0),
+                  padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
                   primary: Colors.white,
                   textStyle: TextStyle(fontSize: 20),
                 ),

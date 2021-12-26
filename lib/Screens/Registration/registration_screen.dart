@@ -15,200 +15,220 @@ class RegistrationScreen extends StatelessWidget {
   String userName;
   String password;
   bool buyer = true;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
     Size size = MediaQuery.of(context).size;
-    double unit = size.width / 12;
-    double height = 10;
+    double height = 3;
     return Scaffold(
       body: Container(
         width: size.width,
+        height: size.height,
         decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage("assets/images/login_background.jpg"))),
         child: Form(
           key: _formKey,
-          child: Row(
-            children: [
-              SizedBox(
-                width: 3 * unit,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  PerceToggleButton(
-                    text1: 'KUPAC',
-                    text2: 'PRODAVAC',
-                    firstChoice: buyer,
-                    function: () {
-                      buyer = !buyer;
-                    },
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 50,
+                ),
+                PerceToggleButton(
+                  text1: 'KUPAC',
+                  text2: 'PRODAVAC',
+                  firstChoice: buyer,
+                  function: () {
+                    buyer = !buyer;
+                  },
+                ),
+                SizedBox(
+                  height: height,
+                ),
+                Container(
+                  width: size.width,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      RobotoText(
+                        displayText: "Ime:",
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      TextFieldInput(
+                        hintText: "Unesi ime",
+                        obscureText: false,
+                        width: 250,
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return "Unesi ime";
+                          }
+                          name = value;
+                          return null;
+                        },
+                      ),
+                      SizedBox(width: 8,),
+                    ],
                   ),
-                  SizedBox(
-                    height: height,
+                ),
+                SizedBox(
+                  height: height,
+                ),
+                Container(
+                  width: size.width,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      RobotoText(
+                        displayText: "Prezime:",
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      TextFieldInput(
+                        hintText: "Unesi prezime",
+                        obscureText: false,
+                        width: 250,
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return "Unesi prezime";
+                          }
+                          lastName = value;
+                          return null;
+                        },
+                      ),
+                      SizedBox(width: 8,),
+                    ],
                   ),
-                  Container(
-                    width: 5 * unit,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        RobotoText(
-                          displayText: "Ime:",
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        TextFieldInput(
-                          hintText: "Unesi ime",
-                          obscureText: false,
-                          width: 5 * unit / 2,
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return "Unesi ime";
-                            }
-                            name = value;
-                            return null;
-                          },
-                        ),
-                      ],
-                    ),
+                ),
+                SizedBox(
+                  height: height,
+                ),
+                Container(
+                  width: size.width,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      RobotoText(
+                        displayText: "Adresa:",
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      TextFieldInput(
+                        hintText: "Unesi adresu",
+                        obscureText: false,
+                        width: 250,
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return "Unesi email adresu";
+                          }
+                          if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value)) {
+                            return "Adresa je u lošem formatu";
+                          }
+                          email = value;
+                          return null;
+                        },
+                      ),
+                      SizedBox(width: 8,),
+                    ],
                   ),
-                  SizedBox(
-                    height: height,
+                ),
+                SizedBox(
+                  height: height,
+                ),
+                Container(
+                  width: size.width,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Column(
+                        children: [
+                          RobotoText(
+                            displayText: "Kontakt",
+                          ),
+                          RobotoText(
+                            displayText: " telefon:",
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      TextFieldInput(
+                        hintText: "Unesi kontakt telefon",
+                        obscureText: false,
+                        width: 250,
+                        validator: (value) {
+                          bool isNumeric = true;
+                          if (value == null) {
+                            isNumeric = false;
+                          } else
+                            isNumeric = double.parse(value, (e) => null) != null;
+                          if (value.isEmpty) {
+                            return "Unesi broj telefona";
+                          }
+                          if (value.isEmpty || !isNumeric) {
+                            return "Broj telefona nije u dobrom formatu";
+                          }
+                          phoneNumber = value;
+                          return null;
+                        },
+                      ),
+                      SizedBox(width: 8,),
+                    ],
                   ),
-                  Container(
-                    width: 5 * unit,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        RobotoText(
-                          displayText: "Prezime:",
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        TextFieldInput(
-                          hintText: "Unesi prezime",
-                          obscureText: false,
-                          width: 5 * unit / 2,
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return "Unesi prezime";
-                            }
-                            lastName = value;
-                            return null;
-                          },
-                        ),
-                      ],
-                    ),
+                ),
+                SizedBox(
+                  height: height,
+                ),
+                Container(
+                  width: size.width,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          RobotoText(
+                            displayText: "Korisničko",
+                          ),
+                          RobotoText(
+                            displayText: "ime:",
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      TextFieldInput(
+                        hintText: "Unesi korisničko ime",
+                        obscureText: false,
+                        width: 250,
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return "Unesi korisničko ime";
+                          }
+                          final box = Boxes.getUsers();
+                          if (box.containsKey(value)) return "Korisničko ime se već koristi...";
+                          userName = value;
+                          return null;
+                        },
+                      ),
+                      SizedBox(width: 8,),
+                    ],
                   ),
-                  SizedBox(
-                    height: height,
-                  ),
-                  Container(
-                    width: 5 * unit,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        RobotoText(
-                          displayText: "Adresa:",
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        TextFieldInput(
-                          hintText: "Unesi adresu",
-                          obscureText: false,
-                          width: 5 * unit / 2,
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return "Unesi email adresu";
-                            }
-                            if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value)) {
-                              return "Adresa je u lošem formatu";
-                            }
-                            email = value;
-                            return null;
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: height,
-                  ),
-                  Container(
-                    width: 5 * unit,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        RobotoText(
-                          displayText: "Kontakt telefon:",
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        TextFieldInput(
-                          hintText: "Unesi kontakt telefon",
-                          obscureText: false,
-                          width: 5 * unit / 2,
-                          validator: (value) {
-                            bool isNumeric = true;
-                            if (value == null) {
-                              isNumeric = false;
-                            } else
-                              isNumeric = double.parse(value, (e) => null) != null;
-                            if (value.isEmpty) {
-                              return "Unesi broj telefona";
-                            }
-                            if (value.isEmpty || !isNumeric) {
-                              return "Broj telefona nije u dobrom formatu";
-                            }
-                            phoneNumber = value;
-                            return null;
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: height,
-                  ),
-                  Container(
-                    width: 5 * unit,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        RobotoText(
-                          displayText: "Korisničko ime:",
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        TextFieldInput(
-                          hintText: "Unesi korisničko ime",
-                          obscureText: false,
-                          width: 5 * unit / 2,
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return "Unesi korisničko ime";
-                            }
-                            final box = Boxes.getUsers();
-                            if (box.containsKey(value)) return "Korisničko ime se već koristi...";
-
-                            userName = value;
-                            return null;
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: height,
-                  ),
-                  Container(
-                    width: 5 * unit,
-                    child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                ),
+                SizedBox(
+                  height: height,
+                ),
+                Container(
+                  width: size.width,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
                       RobotoText(
                         displayText: "Lozinka:",
                       ),
@@ -218,7 +238,7 @@ class RegistrationScreen extends StatelessWidget {
                       TextFieldInput(
                         hintText: "Unesi lozinku",
                         obscureText: true,
-                        width: 5 * unit / 2,
+                        width: 250,
                         validator: (value) {
                           if (value.isEmpty) {
                             return "Unesi lozinku";
@@ -229,67 +249,62 @@ class RegistrationScreen extends StatelessWidget {
                           password = value;
                           return null;
                         },
-                      )
-                    ]),
+                      ),
+                      SizedBox(width: 8,),
+                    ],
                   ),
-                  SizedBox(
-                    height: height,
-                  ),
-                  PerceButton(
-                    color1: Color(0xFF133069),
-                    color2: Color(0xFF133069),
-                    color3: Color(0xFF133069),
-                    text: 'REGISTRUJ SE',
-                    function: () {
-                      if (_formKey.currentState.validate()) {
-                        final user = User()
-                          ..name = name
-                          ..password = password
-                          ..lastName = lastName
-                          ..userName = userName
-                          ..phoneNumber = phoneNumber
-                          ..email = email
-                          ..buyer = buyer;
-                        Boxes.getUsers().put(userName, user);
-                        LoggedUser loggedUserCopy = LoggedUser()
-                          ..name = user.name
-                          ..phoneNumber = user.phoneNumber
-                          ..email = user.email
-                          ..password = user.password
-                          ..userName = user.userName
-                          ..lastName = user.lastName
-                          ..buyer = user.buyer;
-                        Boxes.loggedUser().put("logged", loggedUserCopy);
-                        Boxes.getUserBookRelations().put(
-                            user.userName,
-                            UserBookRelation()
-                              ..username = user.userName
-                              ..bookUrls = []);
-                        if (loggedUserCopy.buyer)
-                          Navigator.of(context).popAndPushNamed("/buyermain");
-                        else
-                          Navigator.of(context).popAndPushNamed("/allbooksprodavac");
-                      }
-                    },
-                  ),
-                  SizedBox(
-                    height: 80,
-                  ),
-                  PerceHyperlink(
-                    text: "Imaš nalog? Prijavi se ovde!",
-                    function: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  SizedBox(
-                    height: 60,
-                  ),
-                ],
-              ),
-              SizedBox(
-                width: 4 * unit,
-              ),
-            ],
+                ),
+                SizedBox(
+                  height: height,
+                ),
+                PerceButton(
+                  color1: Color(0xFF133069),
+                  color2: Color(0xFF133069),
+                  color3: Color(0xFF133069),
+                  text: 'REGISTRUJ SE',
+                  function: () {
+                    if (_formKey.currentState.validate()) {
+                      final user = User()
+                        ..name = name
+                        ..password = password
+                        ..lastName = lastName
+                        ..userName = userName
+                        ..phoneNumber = phoneNumber
+                        ..email = email
+                        ..buyer = buyer;
+                      Boxes.getUsers().put(userName, user);
+                      LoggedUser loggedUserCopy = LoggedUser()
+                        ..name = user.name
+                        ..phoneNumber = user.phoneNumber
+                        ..email = user.email
+                        ..password = user.password
+                        ..userName = user.userName
+                        ..lastName = user.lastName
+                        ..buyer = user.buyer;
+                      Boxes.loggedUser().put("logged", loggedUserCopy);
+                      Boxes.getUserBookRelations().put(
+                          user.userName,
+                          UserBookRelation()
+                            ..username = user.userName
+                            ..bookUrls = []);
+                      if (loggedUserCopy.buyer)
+                        Navigator.of(context).popAndPushNamed("/buyermain");
+                      else
+                        Navigator.of(context).popAndPushNamed("/allbooksprodavac");
+                    }
+                  },
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                PerceHyperlink(
+                  text: "Imaš nalog? Prijavi se ovde!",
+                  function: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
