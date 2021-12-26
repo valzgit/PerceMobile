@@ -7,6 +7,9 @@ class PerceButton extends StatelessWidget {
   final Color color3;
   final String text;
   final Function function;
+  final double fontSize;
+  final double paddingH;
+  final double paddingV;
 
   const PerceButton({
     Key key,
@@ -14,7 +17,10 @@ class PerceButton extends StatelessWidget {
     this.color2,
     this.color3,
     this.text,
-    this.function
+    this.function,
+    this.fontSize,
+    this.paddingH,
+    this.paddingV
   }) : super(key: key);
 
   @override
@@ -38,13 +44,14 @@ class PerceButton extends StatelessWidget {
           ),
           TextButton(
             style: TextButton.styleFrom(
-              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
+              padding: EdgeInsets.symmetric(horizontal: paddingH == null? 10.0 : paddingH, vertical: paddingV == null ? 2.0 : paddingV),
               primary: Colors.white,
-              textStyle: TextStyle(fontSize: 16),
+              textStyle: TextStyle(fontSize: fontSize == null ? 16 : fontSize),
             ),
             onPressed: function,
             child: CinzelText(
               displayText: text,
+              fontSize: fontSize,
             ),
           ),
         ],

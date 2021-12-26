@@ -9,48 +9,60 @@ class AllBooksBook extends StatelessWidget {
   final String imageUrl;
   final String writerName;
   final String bookName;
+  final double paddingH;
+  final double paddingV;
+  final double buttonFontSize;
 
-  const AllBooksBook({Key key, this.imageUrl, this.bookName, this.writerName}) : super(key: key);
+  const AllBooksBook({Key key, this.imageUrl, this.bookName, this.writerName, this.paddingV, this.paddingH, this.buttonFontSize}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
       width: size.width,
-      height: 250,
+      height: 150,
       decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Colors.black))),
       child: Row(
         children: [
           BookClickableImage(
             imageUrl: imageUrl,
-            height: 200,
-            width: 140,
+            height: 120,
+            width: 80,
           ),
           SizedBox(
-            width: 60,
+            width: 20,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CinzelText(
-                fontSize: 32,
-                displayText: bookName,
-                color: Colors.black,
+              Container(
+                width: 150,
+                child: CinzelText(
+                  fontSize: 16,
+                  displayText: bookName,
+                  color: Colors.black,
+                ),
               ),
               SizedBox(
-                height: 35,
+                height: 10,
               ),
-              CinzelText(
-                fontSize: 32,
-                displayText: writerName,
-                color: Colors.black,
+              Container(
+                width: 150,
+                child: CinzelText(
+                  fontSize: 16,
+                  displayText: writerName,
+                  color: Colors.black,
+                ),
               )
             ],
           ),
           Spacer(),
           PerceButton(
-            text: "DETALJI KNJIGE",
+            text: "DETALJI",
+            paddingV: paddingV,
+            paddingH: paddingH,
+            fontSize: buttonFontSize,
             function: (){
               Book book = Boxes.getBooks().get(imageUrl);
               LoggedUser loggedUser = Boxes.loggedUser().get("logged");
@@ -71,7 +83,7 @@ class AllBooksBook extends StatelessWidget {
             color3: Color(0xFF133069),
           ),
          SizedBox(
-           width: 65,
+           width: 15,
          )
         ],
       ),

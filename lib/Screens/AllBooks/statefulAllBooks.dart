@@ -24,19 +24,26 @@ class _StatefulAllBooksScreenState extends State<StatefulAllBooksScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    double unit = size.height / 12;
     List<Widget> allBooks = [];
     for (int i = 0; i < Boxes.getBooks().length; ++i) {
       Book book = Boxes.getBooks().getAt(i);
-      if ((pickedGenre == "Svaki" || pickedGenre==book.genre) && (promotion == false || book.promoted) && (book.name.toLowerCase().contains(searchParam.toLowerCase()) || book.writer.toLowerCase().contains(searchParam.toLowerCase())))
-        allBooks.add(AllBooksBook(
-          key: UniqueKey(),
-          imageUrl: book.bookUrl,
-          bookName: book.name,
-          writerName: book.writer,
-        ));
+      if ((pickedGenre == "Svaki" || pickedGenre == book.genre) &&
+          (promotion == false || book.promoted) &&
+          (book.name.toLowerCase().contains(searchParam.toLowerCase()) || book.writer.toLowerCase().contains(searchParam.toLowerCase())))
+        allBooks.add(
+          AllBooksBook(
+            key: UniqueKey(),
+            imageUrl: book.bookUrl,
+            bookName: book.name,
+            writerName: book.writer,
+            paddingH: 15,
+            paddingV: 0,
+            buttonFontSize: 16,
+          ),
+        );
     }
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: InkWell(
           onTap: () {
@@ -48,10 +55,10 @@ class _StatefulAllBooksScreenState extends State<StatefulAllBooksScreen> {
               children: [
                 CinzelText(
                   displayText: "Perce",
-                  fontSize: 62,
+                  fontSize: 40,
                 ),
                 SizedBox(
-                  width: 20,
+                  width: 5,
                 ),
                 Container(
                   width: 26,
@@ -108,7 +115,7 @@ class _StatefulAllBooksScreenState extends State<StatefulAllBooksScreen> {
             ),
           ),
           SizedBox(
-            width: 35,
+            width: 10,
           )
         ],
       ),
@@ -117,104 +124,115 @@ class _StatefulAllBooksScreenState extends State<StatefulAllBooksScreen> {
         decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage("assets/images/plain_background.jpg"))),
         child: Column(
           children: [
-            SizedBox(
-              height: unit / 3,
-            ),
             Form(
               key: _formKey,
-              child: Row(
+              child: Column(
                 children: [
-                  SizedBox(
-                    width: 40,
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 10,
+                      ),
+                      CinzelText(
+                        displayText: "SVE KNJIGE",
+                        fontSize: 30,
+                        color: Color(0xFF000000),
+                      ),
+                    ],
                   ),
-                  CinzelText(
-                    displayText: "SVE KNJIGE",
-                    fontSize: 48,
+                  Container(
+                    width: size.width,
+                    height: 4,
                     color: Color(0xFF000000),
                   ),
-                  SizedBox(
-                    width: 300,
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 10,
+                      ),
+                      CinzelText(
+                        displayText: "PRETRAŽI:",
+                        fontSize: 16,
+                        color: Color(0xFF000000),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      TextFieldInput(
+                        hintText: "Unesi knjigu ili pisca",
+                        obscureText: false,
+                        width: 220,
+                        validator: (value) {
+                          setState(() {
+                            if (value == null)
+                              searchParam = "";
+                            else
+                              searchParam = value;
+                          });
+                          return null;
+                        },
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          _formKey.currentState.validate();
+                        },
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage("assets/images/lupa.png"))),
+                        ),
+                      ),
+                    ],
                   ),
-                  CinzelText(
-                    displayText: "ŽANR:",
-                    fontSize: 24,
-                    color: Color(0xFF000000),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  PerceDropdownButton(
-                    function: (newValue) {
-                      pickedGenre = newValue;
-                      setState(() {});
-                    },
-                  ),
-                  SizedBox(
-                    width: 40,
-                  ),
-                  CinzelText(
-                    displayText: "PROMOCIJA:",
-                    fontSize: 24,
-                    color: Color(0xFF000000),
-                  ),
-                  PerceCheckBox(
-                    function: () {
-                      setState(() {
-                        promotion = !promotion;
-                      });
-                    },
-                  ),
-                  SizedBox(
-                    width: 40,
-                  ),
-                  CinzelText(
-                    displayText: "PRETRAŽI:",
-                    fontSize: 24,
-                    color: Color(0xFF000000),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  TextFieldInput(
-                    hintText: "Unesi knjigu ili pisca",
-                    obscureText: false,
-                    width: 2.5 * size.width / 24,
-                    validator: (value) {
-                      setState(() {
-                        if (value == null)
-                          searchParam = "";
-                        else
-                          searchParam = value;
-                      });
-                      return null;
-                    },
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      _formKey.currentState.validate();
-                    },
-                    child: Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage("assets/images/lupa.png"))),
-                    ),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 10,
+                      ),
+                      CinzelText(
+                        displayText: "PROMOCIJA:",
+                        fontSize: 16,
+                        color: Color(0xFF000000),
+                      ),
+                      PerceCheckBox(
+                        function: () {
+                          setState(() {
+                            promotion = !promotion;
+                          });
+                        },
+                      ),
+                      CinzelText(
+                        displayText: "ŽANR:",
+                        fontSize: 16,
+                        color: Color(0xFF000000),
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      PerceDropdownButton(
+                        function: (newValue) {
+                          pickedGenre = newValue;
+                          setState(() {});
+                        },
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
             SizedBox(
-              height: 15,
+              height: 5,
             ),
             Container(
               width: size.width,
-              height: 4,
+              height: 2,
               color: Color(0xFF000000),
             ),
             Container(
-              height: size.height - 15 - 40 - 130,
+              height: size.height - 257,
               child: SingleChildScrollView(
                 child: Column(
                   children: allBooks,

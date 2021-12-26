@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class CinzelText extends StatelessWidget {
@@ -6,22 +7,16 @@ class CinzelText extends StatelessWidget {
   final double fontSize;
   final Color color;
 
-  const CinzelText({
-    Key key,
-    this.displayText,
-    this.fontWeight,
-    this.fontSize,
-    this.color
-  }) : super(key: key);
+  const CinzelText({Key key, this.displayText, this.fontWeight, this.fontSize, this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
       displayText,
       style: TextStyle(
-        color: color==null ? Colors.white : color,
+        color: color == null ? Colors.white : color,
         fontWeight: fontWeight,
-        fontSize: fontSize==null? 30 : fontSize,
+        fontSize: fontSize == null ? 30 : fontSize,
         fontFamily: 'Cinzel',
       ),
     );

@@ -27,7 +27,7 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
     final _formKey = GlobalKey<FormState>();
     String comment = "";
     Size size = MediaQuery.of(context).size;
-    double unit = size.height / 12;
+    double unit = size.height / 24;
     List<Widget> comments = [];
     var stars = PerceStarsSelect(
       width: 150,
@@ -102,16 +102,16 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
       if (i <= starsRate) {
         starsList.add(
           Container(
-            width: 35,
-            height: 35,
+            width: 20,
+            height: 20,
             decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage("assets/images/star.png"))),
           ),
         );
       } else {
         starsList.add(
           Container(
-            width: 35,
-            height: 35,
+            width: 20,
+            height: 20,
             decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage("assets/images/emptystar.png"))),
           ),
         );
@@ -132,10 +132,10 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
               children: [
                 CinzelText(
                   displayText: "Perce",
-                  fontSize: 62,
+                  fontSize: 40,
                 ),
                 SizedBox(
-                  width: 20,
+                  width: 5,
                 ),
                 Container(
                   width: 26,
@@ -192,7 +192,7 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
             ),
           ),
           SizedBox(
-            width: 35,
+            width: 10,
           )
         ],
       ),
@@ -201,8 +201,8 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
         decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage("assets/images/plain_background.jpg"))),
         child: Column(
           children: [
-            Container(
-              height: 70,
+            SizedBox(
+              height: 30,
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -211,16 +211,17 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
                   children: [
                     BookImage(
                       imageUrl: storedBook.bookUrl,
-                      height: 455,
-                      width: 300,
+                      height: 180,
+                      width: 120,
+                      marginLeft: 20,
                     ),
                     SizedBox(
-                      height: 30,
+                      height: 10,
                     ),
                     Row(
                       children: [
                         SizedBox(
-                          width: 70,
+                          width: 25,
                         ),
                         Row(
                           children: starsList,
@@ -230,7 +231,7 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
                   ],
                 ),
                 SizedBox(
-                  width: unit * 2.5,
+                  width: unit,
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -239,81 +240,81 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
                     CinzelText(
                       displayText: storedBook.name,
                       color: Colors.black,
-                      fontSize: 45,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
                     ),
+                    CinzelText(
+                      displayText: storedBook.writer,
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    SizedBox(height: 5,),
+                    CinzelText(
+                      displayText: storedBook.placeYear,
+                      color: Colors.black,
+                      fontSize: 14,
+                    ),
+                    CinzelText(
+                      displayText: "Broj strana: " + storedBook.pageNumber.toString(),
+                      fontSize: 14,
+                      color: Colors.black,
+                    ),
+                    SizedBox(height: 20,),
                     Row(
                       children: [
-                        CinzelText(
-                          displayText: storedBook.writer,
-                          color: Colors.black,
-                          fontSize: 45,
-                        ),
-                        SizedBox(
-                          width: 120,
-                        ),
-                        CinzelText(
-                          displayText: storedBook.placeYear,
-                          color: Colors.black,
-                          fontSize: 35,
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 40,
-                    ),
-                    Container(
-                      height: 320,
-                      width: 1000,
-                      child: CinzelAutoSizeText(
-                        displayText: storedBook.details,
-                        fontSize: 25,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      children: [
-                        CinzelText(
-                          displayText: "Broj strana: " + storedBook.pageNumber.toString(),
-                          fontSize: 30,
-                          color: Colors.black,
-                        ),
-                        SizedBox(
-                          width: 340,
-                        ),
                         PerceButton(
-                          color1: Color(0xFF111F38),
-                          color2: Color(0xFF111F38),
-                          color3: Color(0xFF111F38),
-                          text: 'NAZAD',
+                          color1: Color(0xFF133069),
+                          color2: Color(0xFF133069),
+                          color3: Color(0xFF133069),
+                          text: 'PREPORUČI',
+                          fontSize: 12,
                           function: () {
-                            Navigator.of(context).pop();
+                            showDialog(
+                                context: context,
+                                builder: (_) => PerceDialog()
+                            );
                           },
                         ),
                         SizedBox(
                           width: 20,
                         ),
                         PerceButton(
-                          color1: Color(0xFF133069),
-                          color2: Color(0xFF133069),
-                          color3: Color(0xFF133069),
-                          text: 'PREPORUČI',
+                          color1: Color(0xFF111F38),
+                          color2: Color(0xFF111F38),
+                          color3: Color(0xFF111F38),
+                          text: 'NAZAD',
+                          fontSize: 12,
+                          paddingV: 0,
+                          paddingH: 0,
                           function: () {
-                            showDialog(
-                              context: context,
-                              builder: (_) => PerceDialog()
-                            );
+                            Navigator.of(context).pop();
                           },
                         ),
                       ],
+                    ),
+                    SizedBox(
+                      height: 40,
                     ),
                   ],
                 ),
               ],
             ),
             SizedBox(
-              height: 40,
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 350,
+                  width: size.width-50,
+                  child: CinzelAutoSizeText(
+                    displayText: storedBook.details,
+                    fontSize: 16,
+                  ),
+                ),
+              ],
             ),
             Form(
               key: _formKey,
