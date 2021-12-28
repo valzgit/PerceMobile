@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
 import 'package:percemobile/Components/Basic/cinzelAutoSizeText.dart';
 import 'package:percemobile/Components/Basic/cinzelText.dart';
 import 'package:percemobile/Components/bookImage.dart';
@@ -13,6 +12,7 @@ import 'package:percemobile/Components/textFieldInput.dart';
 import 'package:percemobile/Hive/boxes.dart';
 import 'package:percemobile/Hive/transaction.dart';
 
+// TODO: FIX TOO LONG NAME
 class BookDetailsPage extends StatefulWidget {
   List<Widget> recommendedFriend = [];
 
@@ -258,17 +258,23 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            CinzelText(
-                              displayText: storedBook.name,
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                            Container(
+                              width: 200,
+                              child: CinzelText(
+                                fontSize: 16,
+                                displayText: storedBook.name,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                            CinzelText(
-                              displayText: storedBook.writer,
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                            Container(
+                              width: 200,
+                              child: CinzelText(
+                                fontSize: 16,
+                                displayText: storedBook.writer,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             SizedBox(
                               height: 5,

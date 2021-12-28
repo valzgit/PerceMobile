@@ -15,7 +15,7 @@ class CinzelText extends StatelessWidget {
       displayText,
       style: TextStyle(
         color: color == null ? Colors.white : color,
-        fontWeight: fontWeight,
+        fontWeight: fontWeight == null ? FontWeight.normal : fontWeight,
         fontSize: fontSize == null ? 30 : fontSize,
         fontFamily: 'Cinzel',
       ),

@@ -31,11 +31,12 @@ class _PerceDialogState extends State<PerceDialog> {
             Form(
               key: _formPopupKey,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextFieldInput(
                     hintText: "Korisničko ime",
                     obscureText: false,
-                    width: 300,
+                    width: 200,
                     validator: (value) {
                       userNameSearched = value;
                       return null;
@@ -48,7 +49,7 @@ class _PerceDialogState extends State<PerceDialog> {
                     onTap: () {
                       final box = Boxes.getUsers();
                       if (_formPopupKey.currentState.validate()) {
-                        int limit = 4;
+                        int limit = 3;
                         recommendedFriend = [];
                         checkedRecommendedFriend = [];
                         for (int i = 0; i < box.length && limit > 0; ++i) {
@@ -65,6 +66,7 @@ class _PerceDialogState extends State<PerceDialog> {
                                   CinzelText(
                                     displayText: box.getAt(i).userName.toString(),
                                     color: Colors.black,
+                                    fontSize: 24,
                                   ),
                                 ],
                               ),
@@ -75,8 +77,8 @@ class _PerceDialogState extends State<PerceDialog> {
                       }
                     },
                     child: Container(
-                      width: 40,
-                      height: 40,
+                      width: 30,
+                      height: 30,
                       decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage("assets/images/lupa.png"))),
                     ),
                   ),
@@ -87,7 +89,7 @@ class _PerceDialogState extends State<PerceDialog> {
               children: [
                 Container(
                   height: 170,
-                  width: 350,
+                  width: 150,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: recommendedFriend,
@@ -96,12 +98,14 @@ class _PerceDialogState extends State<PerceDialog> {
               ],
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 PerceButton(
                   color1: Color(0xFF133069),
                   color2: Color(0xFF133069),
                   color3: Color(0xFF133069),
                   text: 'PREPORUČI',
+                  fontSize: 20,
                   function: () {
                     for(int i=0;i<checkedRecommendedFriend.length;++i){
                       UserBookRelation userBookRelation = Boxes.getUserBookRelations().get(checkedRecommendedFriend[i]);
@@ -126,6 +130,7 @@ class _PerceDialogState extends State<PerceDialog> {
                   color2: Color(0xFF0E1926),
                   color3: Color(0xFF0E1926),
                   text: 'NAZAD',
+                  fontSize: 20,
                   function: () {
                     Navigator.of(context).pop();
                   },
