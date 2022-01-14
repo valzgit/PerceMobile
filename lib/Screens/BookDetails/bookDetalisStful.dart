@@ -41,7 +41,9 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
     );
     double starsRate = 0;
     numOfComments = 0;
+    var canComment = true;
     for (int i = 0; i < bookComments.userNames.length; ++i) {
+      if(bookComments.userNames[i]==loggedUser.userName) canComment = false;
       starsRate += bookComments.starsGiven[i];
       ++numOfComments;
       comments.add(
@@ -377,6 +379,7 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
                               children: [
                                 stars,
                                 SizedBox(height: 10,),
+                                canComment?
                                 PerceButton(
                                   color1: Color(0xFF136940),
                                   color2: Color(0xFF136940),
@@ -393,7 +396,16 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
                                       setState(() {_formKey = GlobalKey<FormState>(); });
                                     }
                                   },
-                                ),
+                                ):
+                                PerceButton(
+                                  color1: Color(0xFF343434),
+                                  color2: Color(0xFF343434),
+                                  color3: Color(0xFF343434),
+                                  text: 'OCENI',
+                                  fontSize: 16,
+                                  function: () {
+                                  },
+                                )
                               ],
                             ),
                           ],
