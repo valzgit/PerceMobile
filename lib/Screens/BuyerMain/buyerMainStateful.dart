@@ -30,6 +30,7 @@ class _BuyerMainStatefulState extends State<BuyerMainStateful> {
         ));
       }
     }
+    if(recommendedBooks.isEmpty)recommendedBooks.add(SizedBox(height: 120,));
     List<Widget> allBooks = [];
     List<Widget> allPromotedBooks = [];
     int promotedCounter = 0;
@@ -59,6 +60,7 @@ class _BuyerMainStatefulState extends State<BuyerMainStateful> {
         ++promotedCounter;
       }
     }
+    if(allPromotedBooks.isEmpty)allPromotedBooks.add(SizedBox(height: 120,));
     allBooks.add(InkWell(
       child: Container(
         width: 80,
